@@ -1,3 +1,4 @@
+import Display from './Display';
 import WeatherAPIFacade from './WeatherAPIFacade';
 import './style.css';
 
@@ -7,5 +8,6 @@ form.addEventListener('submit', (e) => {
 
   const formData = new FormData(form);
   const location = formData.get('location');
-  WeatherAPIFacade.getWeather(location);
+  const weatherPromise = WeatherAPIFacade.getWeather(location);
+  weatherPromise.then((data) => Display.displayWeather(data));
 })

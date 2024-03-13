@@ -24,10 +24,9 @@ export default class WeatherAPIFacade {
     return await response.json();
   }
 
-  static getWeather(location) {
-    this.fetchWeatherData(location)
+  static async getWeather(location) {
+    return this.fetchWeatherData(location)
       .then(data => this.processWeatherData(data))
-      .then(data => console.log(JSON.stringify(data)));
   }
 
   static getWeatherPromise(location) {

@@ -1,5 +1,5 @@
 export default class WeatherAPIFacade {
-  static API_KEY;
+  static API_KEY = process.env.API_KEY;
   static API_URL = 'http://api.weatherapi.com/v1/forecast.json';
 
   static processWeatherData(data) {

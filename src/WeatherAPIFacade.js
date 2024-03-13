@@ -4,10 +4,9 @@ export default class WeatherAPIFacade {
 
   static processWeatherData(data) {
     const processedData = {};
+    processedData.location = data.location.name;
     processedData.currentTemp = data.current.temp_f;
     processedData.forecast = [];
-
-    console.log(data);
     
     data.forecast.forecastday.forEach((data) => {
       const forecastDay = {}

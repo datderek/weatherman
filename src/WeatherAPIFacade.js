@@ -4,15 +4,39 @@ export default class WeatherAPIFacade {
 
   static processWeatherData(data) {
     const processedData = {};
-    processedData.location = data.location.name;
-    processedData.currentTemp = data.current.temp_f;
+
+    processedData.current = {
+      'location': data.location.name,
+      'region': data.location.region,
+      'condition': data.current.condition.text,
+      'currentTemp': data.current.temp_f,
+    }
+
+    processedData.additionalDetails = {
+      'uvIndex': data.current.uv,
+      'wind': data.current.wind_mph,
+      'humidity': data.current.humidity,
+      'visibility': data.current.vis_miles,
+      'pressure': data.current.pressure_in,
+    }
+
+    processedData.hourly = [];
+    data.forecast.forecastday[0].hour.forEach((hour) => {
+      const hourlyCondition = {
+        'time': hour.time,
+        'temperature': hour.temp_f,
+        'condition': hour.condition.text,
+      }
+      processedData.hourly.push(hourlyCondition);
+    })
+
     processedData.forecast = [];
-    
-    data.forecast.forecastday.forEach((data) => {
-      const forecastDay = {}
-      forecastDay.date = data.date;
-      forecastDay.maxTemp = data.day.maxtemp_f;
-      forecastDay.minTemp = data.day.mintemp_f;
+    data.forecast.forecastday.forEach((day) => {
+      const forecastDay = {
+        "date": day.date,
+        "maxTemp": day.day.maxtemp_f,
+        "minTemp": day.day.mintemp_f,
+      }
       processedData.forecast.push(forecastDay);
     })
 

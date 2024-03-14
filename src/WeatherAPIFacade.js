@@ -9,7 +9,7 @@ export default class WeatherAPIFacade {
       'location': data.location.name,
       'region': data.location.region,
       'condition': data.current.condition.text,
-      'currentTemp': data.current.temp_f,
+      'temperature': data.current.temp_f,
     }
 
     processedData.additionalDetails = {

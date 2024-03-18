@@ -10,6 +10,7 @@
   margin: 0; 
   font-size: inherit;
   font-weight: normal;
+  list-style-type: none;
 }
 
 body {
@@ -31,11 +32,14 @@ main {
 
 #current, #forecast, #controls, #additional-details {
   border-radius: 0.5rem;
-  padding: 0.5rem;
 }
 
+/*
+ * Current Information Section
+ */
 #current {
   grid-row: 1 / 3;
+  padding: 1rem;
   background-color: blue;
   display: flex;
   flex-direction: column;
@@ -63,6 +67,9 @@ main {
   text-transform: lowercase;
 }
 
+/*
+ * Hourly Information Section
+ */
 #hourly {
   background-color: rgba(0,0,0,0.2);
   height: 125px;
@@ -74,7 +81,6 @@ main {
   display: flex;
   gap: 0.5rem;
   overflow: auto;
-  list-style-type: none;
 }
 
 #hourly-list > li {
@@ -84,14 +90,21 @@ main {
   background-color: lightgray;
 }
 
+/*
+ * 5-Day Forecast Section
+ */
 #forecast {
   grid-row: 3;
   grid-column: 1 / 3;
   background-color: red;  
 }
 
+/*
+ * Controls Section
+ */
 #controls {
   background-color: yellow;
+  padding: 0.5rem;
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
@@ -139,9 +152,41 @@ input {
   display: block;
   height: 100%;
 }
+
+/*
+ * Additional Details Section
+ */
 #additional-details {
+  padding: 1rem;
   background-color: green;
+  display: flex;
+  flex-direction: column;
 }
+
+#details-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: auto;
+}
+
+.details {
+  padding: 0rem 1rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.details:last-child {
+  border-bottom: none;
+}
+
+.details > span:last-child {
+  margin-left: auto;
+}
+
 
 @media only screen and (max-width: 1000px) {
   body {

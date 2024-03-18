@@ -72,7 +72,6 @@ main {
  */
 #hourly {
   background-color: rgba(0,0,0,0.2);
-  height: 125px;
   padding: 1rem;
 }
 
@@ -83,11 +82,24 @@ main {
   overflow: auto;
 }
 
-#hourly-list > li {
+.hourly-details {
   flex: none;
-  width: 150px;
+  width: 80px;
   border-radius: 0.5rem;
   background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hourly-details > div {
+  height: 70px;
+  width: 100%;
+  background-color: yellow;
+}
+
+.hourly-details > span:last-child {
+  font-size: 1.25rem;
 }
 
 /*

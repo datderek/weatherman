@@ -74,6 +74,7 @@ export default class Display {
       element.replaceChildren();
     })
   }
+  
   static updateDisplay(data) {
     this.clearDisplay();
     this.displayCurrent(data.current);

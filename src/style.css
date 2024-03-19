@@ -2,6 +2,10 @@
 
 :root {
   font-family: "Poppins", sans-serif;
+  --floral-white: #FFFCF3;
+  --cerulean: #06789D;
+  --rich-black: #121B2B;
+  --columbia-blue: #C5D2E7;
 }
 
 * {
@@ -11,6 +15,7 @@
   font-size: inherit;
   font-weight: normal;
   list-style-type: none;
+  color: var(--rich-black);
 }
 
 body {
@@ -18,6 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--cerulean);
 }
 
 main {
@@ -30,7 +36,7 @@ main {
   gap: 1rem;
 }
 
-#current, #forecast, #controls, #additional-details {
+#current, #forecast, #controls, #additional-details, #details, #hourly, .forecast-details {
   border-radius: 0.5rem;
 }
 
@@ -40,7 +46,7 @@ main {
 #current {
   grid-row: 1 / 3;
   padding: 1rem;
-  background-color: blue;
+  background-color: rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -49,17 +55,36 @@ main {
 
 #details {
   flex: 1;
-  background-color: rgba(0,0,0,0.2);
+  background: linear-gradient(to bottom,  #fdc352 0%,#e8ed92 100%);
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 
 #details > p {
   font-size: 1.75rem;
 }
 
+#details > div {
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+#details > div > img {
+  display: block;
+  max-height: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 #current-location, #current-condition, #current-temperature {
   font-weight: 800;
-  color: white;
+  color: var(--floral-white);
   text-decoration: underline;
 }
 
@@ -71,6 +96,7 @@ main {
  * Hourly Information Section
  */
 #hourly {
+  flex: 0 0 calc(130px + 1rem);
   background-color: rgba(0,0,0,0.2);
   padding: 1rem;
 }
@@ -93,9 +119,8 @@ main {
 }
 
 .hourly-details > div {
-  height: 70px;
   width: 100%;
-  background-color: yellow;
+  background-color: rgba(0,0,0,0.2);
 }
 
 .hourly-details > span:last-child {
@@ -109,7 +134,7 @@ main {
   grid-row: 3;
   grid-column: 1 / 3;
   padding: 1rem;
-  background-color: red;
+  background-color: rgba(0,0,0,0.2);
   display: flex;
   gap: 0.5rem;
 }
@@ -141,8 +166,8 @@ main {
  * Controls Section
  */
 #controls {
-  background-color: yellow;
-  padding: 0.5rem;
+  background-color: rgba(0,0,0,0.2);
+  padding: 1.0rem;
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
@@ -162,12 +187,13 @@ input {
   width: 100%;
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
+  background-color: var(--floral-white);
 }
 
 #search-button {
   outline: none;
   border: none;
-  background-color: white;
+  background-color: transparent;
   position: absolute;
   right: 0.5rem;
   top: 50%;
@@ -184,6 +210,7 @@ input {
   border: none;
   background-color: transparent;
   aspect-ratio: 1 / 1;
+
 }
 
 #settings-button > img {
@@ -196,7 +223,7 @@ input {
  */
 #additional-details {
   padding: 1rem;
-  background-color: green;
+  background-color: rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
 }
@@ -243,14 +270,16 @@ input {
   }
 
   #current {
+    flex: none;
     height: 35rem;
   }
 
   #additional-details {
+    flex: none;
     height: 25rem;
   }
 
   #forecast {
-    height: 15rem;
+    height: 10rem;
   }
 }

@@ -13,8 +13,8 @@ import Thunder from './icons/thunder.png';
 
 export default class WeatherIcons {
   static icons = {
-    1000: DayClear,
-    1003: DayPartiallyCloudy,
+    1000: { "day": DayClear, "night": NightClear },
+    1003: { "day": DayPartiallyCloudy, "night": NightPartiallyCloudy },
     1006: Cloudy,
     1009: Cloudy,
     1069: Sleet,
@@ -64,9 +64,19 @@ export default class WeatherIcons {
     1282: Thunder,
   };
 
-  static getIcon(code) {
+  static getIcon(code, isDay = 1) {
     const weatherIcon = new Image();
-    const iconUrl = this.icons[code];
+    let iconUrl;
+    if (code === 1000 || code === 1003) {
+      if (isDay) {
+        iconUrl = this.icons[code].day;
+      } else {
+        iconUrl = this.icons[code].night;
+      }
+    } else {
+      iconUrl = this.icons[code];
+    }
+
     if (iconUrl) {
       weatherIcon.src = iconUrl;
     }

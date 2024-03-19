@@ -12,6 +12,7 @@ export default class WeatherAPIFacade {
       'conditionCode': data.current.condition.code,
       'temperature': data.current.temp_f,
       'time': data.current.last_updated,
+      'isDay': data.current.is_day,
     }
 
     processedData.additionalDetails = {
@@ -28,6 +29,7 @@ export default class WeatherAPIFacade {
         'time': hour.time,
         'temperature': hour.temp_f,
         'conditionCode': hour.condition.code,
+        'isDay': hour.is_day,
       }
       processedData.hourly.push(hourlyCondition);
     })

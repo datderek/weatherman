@@ -15,7 +15,7 @@ export default class Display {
     this.currentLocation.textContent = `${data.location}, ${data.region}`;
     this.currentCondition.textContent = `${data.condition}`;
     this.currentTemperature.textContent = `${data.temperature} °F`;
-    this.currentIcon.appendChild(WeatherIcon.getIcon(data.conditionCode));
+    this.currentIcon.appendChild(WeatherIcon.getIcon(data.conditionCode, data.isDay));
 
     const hour = new Date(data.time).getHours();
     this.details.className = "";
@@ -41,7 +41,7 @@ export default class Display {
       time.textContent = (hourlyData.time.split(' '))[1];
       const hour = new Date(hourlyData.time).getHours();
       const weatherIcon = document.createElement('div');
-      weatherIcon.appendChild(WeatherIcon.getIcon(hourlyData.conditionCode));
+      weatherIcon.appendChild(WeatherIcon.getIcon(hourlyData.conditionCode, hourlyData.isDay));
       weatherIcon.classList.add(`g${hour}`);
       const temperature = document.createElement('span');
       temperature.textContent = `${hourlyData.temperature} °F`;

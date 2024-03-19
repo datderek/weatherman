@@ -3,6 +3,7 @@
 :root {
   font-family: "Poppins", sans-serif;
   --floral-white: #FFFCF3;
+  --floral-white-transparent: #FFFCF350;
   --cerulean: #06789D;
   --midnight-green: #045A76;
   --rich-black: #121B2B;
@@ -93,14 +94,14 @@ body::-webkit-scrollbar-track {
   font-size: 1.75rem;
 }
 
-#details > div {
+#current-icon {
   flex: 1;
   width: 100%;
   overflow: hidden;
   position: relative;
 }
 
-#details > div > img {
+#current-icon > img {
   display: block;
   max-height: 100%;
   position: absolute;
@@ -146,7 +147,17 @@ body::-webkit-scrollbar-track {
 
 .hourly-details > div {
   width: 100%;
-  background-color: rgba(0,0,0,0.2);
+  height: 100%;
+  position: relative;
+}
+
+.hourly-details > div > img {
+  display: block;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .hourly-details > span:last-child {
@@ -168,15 +179,27 @@ body::-webkit-scrollbar-track {
 
 .forecast-details {
   height: 100%;
-  flex: 1;
+  flex: 1 0 auto;
+  min-width: 0;
   display: flex;
   align-items: center;
-  background-color: wheat;
+  background-color: var(--floral-white-transparent);
   padding: 0.5rem;
 }
 
 .forecast-details > div:nth-child(2) {
-  margin: auto;
+  height: 100%;
+  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.forecast-details > div:nth-child(2) > img {
+  display: block;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .forecast-temperatures {

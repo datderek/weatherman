@@ -9,6 +9,7 @@ export default class WeatherAPIFacade {
       'location': data.location.name,
       'region': data.location.region,
       'condition': data.current.condition.text,
+      'conditionCode': data.current.condition.code,
       'temperature': data.current.temp_f,
     }
 
@@ -25,7 +26,7 @@ export default class WeatherAPIFacade {
       const hourlyCondition = {
         'time': hour.time,
         'temperature': hour.temp_f,
-        'condition': hour.condition.text,
+        'conditionCode': hour.condition.code,
       }
       processedData.hourly.push(hourlyCondition);
     })
@@ -34,12 +35,14 @@ export default class WeatherAPIFacade {
     data.forecast.forecastday.forEach((day) => {
       const forecastDay = {
         "date": day.date,
+        "conditionCode": day.day.condition.code,
         "maxTemp": day.day.maxtemp_f,
         "minTemp": day.day.mintemp_f,
       }
       processedData.forecast.push(forecastDay);
     })
 
+    console.log(JSON.stringify(processedData));
     return processedData;
   }
 

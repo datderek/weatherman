@@ -1,9 +1,11 @@
 import { format } from 'date-fns';
+import WeatherIcon from './WeatherIcon';
 
 export default class Display {
   static currentCondition = document.getElementById('current-condition');
   static currentLocation = document.getElementById('current-location');
   static currentTemperature = document.getElementById('current-temperature');
+  static currentIcon = document.getElementById('current-icon');
   static hourlyList = document.getElementById('hourly-list');
   static additionalDetails = document.getElementsByClassName('details');
   static forecast = document.getElementById('forecast');
@@ -12,6 +14,7 @@ export default class Display {
     this.currentLocation.textContent = `${data.location}, ${data.region}`;
     this.currentCondition.textContent = `${data.condition}`;
     this.currentTemperature.textContent = `${data.temperature} °F`;
+    this.currentIcon.appendChild(WeatherIcon.getIcon(data.conditionCode));
   }
 
   static displayAdditionalDetails(data) {
@@ -32,6 +35,7 @@ export default class Display {
       const hour = document.createElement('span');
       hour.textContent = (hourlyData.time.split(' '))[1];
       const weatherIcon = document.createElement('div');
+      weatherIcon.appendChild(WeatherIcon.getIcon(hourlyData.conditionCode));
       const temperature = document.createElement('span');
       temperature.textContent = `${hourlyData.temperature} °F`;
       
@@ -46,11 +50,10 @@ export default class Display {
 
   static displayForecast(data) {
     data.forEach((forecastData) => {
-      console.log(forecastData);
       const date = document.createElement('div');
       date.textContent = format(new Date(forecastData.date), 'M/dd');
       const weatherIcon = document.createElement('div');
-      weatherIcon.textContent = 'ICON';
+      weatherIcon.appendChild(WeatherIcon.getIcon(forecastData.conditionCode));
       const maxTemp = document.createElement('div');
       maxTemp.textContent = `${forecastData.maxTemp} °F`;
       const minTemp = document.createElement('div');

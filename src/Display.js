@@ -1,63 +1,76 @@
+import { format } from 'date-fns';
+
 export default class Display {
-  static details = document.getElementById('details');
-  static hourly = document.getElementById('hourly');
-  static additionalDetails = document.getElementById('additional-details');
+  static currentCondition = document.getElementById('current-condition');
+  static currentLocation = document.getElementById('current-location');
+  static currentTemperature = document.getElementById('current-temperature');
+  static hourlyList = document.getElementById('hourly-list');
+  static additionalDetails = document.getElementsByClassName('details');
   static forecast = document.getElementById('forecast');
 
   static displayCurrent(data) {
-    const location = document.createElement('div');
-    location.textContent = `${data.location}, ${data.region}`;
-    const condition = document.createElement('div');
-    condition.textContent = `${data.condition}`;
-    const temperature = document.createElement('div');
-    temperature.textContent = `${data.temperature}`;
-
-    this.details.appendChild(location);
-    this.details.appendChild(condition);
-    this.details.appendChild(temperature);
+    this.currentLocation.textContent = `${data.location}, ${data.region}`;
+    this.currentCondition.textContent = `${data.condition}`;
+    this.currentTemperature.textContent = `${data.temperature} °F`;
   }
 
   static displayAdditionalDetails(data) {
-    const uv = document.createElement('div');
-    uv.textContent = `UV: ${data.uvIndex}`;
-    const wind = document.createElement('div');
-    wind.textContent = `Wind: ${data.wind}`;
-    const humidity = document.createElement('div');
-    humidity.textContent = `Humidity: ${data.humidity}`;
-    const visibility = document.createElement('div');
-    visibility.textContent = `Visibility: ${data.visibility}`;
-    const pressure = document.createElement('div');
-    pressure.textContent = `Pressure: ${data.pressure}`;
-
-    this.additionalDetails.appendChild(uv);
-    this.additionalDetails.appendChild(wind);
-    this.additionalDetails.appendChild(humidity);
-    this.additionalDetails.appendChild(visibility);
-    this.additionalDetails.appendChild(pressure);
+    const uv = this.additionalDetails[0].lastChild;
+    uv.textContent = data.uvIndex;
+    const wind = this.additionalDetails[1].lastChild;
+    wind.textContent = `${data.wind} mph`;
+    const humidity = this.additionalDetails[2].lastChild;
+    humidity.textContent = `${data.humidity} %`;
+    const visibility = this.additionalDetails[3].lastChild;
+    visibility.textContent = `${data.visibility} miles`;
+    const pressure = this.additionalDetails[4].lastChild;
+    pressure.textContent = `${data.pressure} in`;
   }
 
   static displayHourly(data) {
     data.forEach((hourlyData) => {
-      const container = document.createElement('div');
-      container.textContent = `${hourlyData.time} - ${hourlyData.condition} - ${hourlyData.temperature}`;
-      this.hourly.appendChild(container);
+      const hour = document.createElement('span');
+      hour.textContent = (hourlyData.time.split(' '))[1];
+      const weatherIcon = document.createElement('div');
+      const temperature = document.createElement('span');
+      temperature.textContent = `${hourlyData.temperature} °F`;
+      
+      const hourlyDetail = document.createElement('li');
+      hourlyDetail.appendChild(hour);
+      hourlyDetail.appendChild(weatherIcon);
+      hourlyDetail.appendChild(temperature);
+      hourlyDetail.classList.add("hourly-details")
+      this.hourlyList.appendChild(hourlyDetail);
     })
   }
 
   static displayForecast(data) {
     data.forEach((forecastData) => {
-      const container = document.createElement('div');
-      container.textContent = `${forecastData.date} - ${forecastData.minTemp}/${forecastData.maxTemp}`;
-      this.forecast.appendChild(container);
+      console.log(forecastData);
+      const date = document.createElement('div');
+      date.textContent = format(new Date(forecastData.date), 'M/dd');
+      const weatherIcon = document.createElement('div');
+      weatherIcon.textContent = 'ICON';
+      const maxTemp = document.createElement('div');
+      maxTemp.textContent = `${forecastData.maxTemp} °F`;
+      const minTemp = document.createElement('div');
+      minTemp.textContent = `${forecastData.minTemp} °F`;
+      const temperatures = document.createElement('div');
+      temperatures.appendChild(maxTemp);
+      temperatures.appendChild(minTemp);
+      temperatures.classList.add('forecast-temperatures');
+
+      const forecastDetail = document.createElement('div');
+      forecastDetail.appendChild(date);
+      forecastDetail.appendChild(weatherIcon);
+      forecastDetail.appendChild(temperatures);
+      forecastDetail.classList.add('forecast-details')
+      this.forecast.appendChild(forecastDetail);
     })
   }
 
-  static displayForecastDay(data) {
-
-  }
-
   static clearDisplay() {
-    [this.details, this.hourly, this.additionalDetails, this.forecast].forEach((element) => {
+    [this.forecast, this.hourlyList, this.currentCondition, this.currentLocation, this.currentTemperature].forEach((element) => {
       element.replaceChildren();
     })
   }

@@ -127,6 +127,16 @@ main {
   margin: auto;
 }
 
+.forecast-temperatures {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.forecast-temperatures > div:first-child {
+  font-size: 1.25rem;
+}
+
 /*
  * Controls Section
  */

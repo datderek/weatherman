@@ -44,7 +44,7 @@ export default class WeatherAPIFacade {
   }
 
   static async fetchWeatherData(location) {
-    const response = await fetch(`${this.API_URL}?key=${this.API_KEY}&q=${location}&days=3&aqi=no&alerts=no`, { mode: 'cors' });
+    const response = await fetch(`${this.API_URL}?key=${this.API_KEY}&q=${location}&days=5&aqi=no&alerts=no`, { mode: 'cors' });
     return await response.json();
   }
 

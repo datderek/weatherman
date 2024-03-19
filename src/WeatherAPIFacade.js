@@ -11,6 +11,7 @@ export default class WeatherAPIFacade {
       'condition': data.current.condition.text,
       'conditionCode': data.current.condition.code,
       'temperature': data.current.temp_f,
+      'time': data.current.last_updated,
     }
 
     processedData.additionalDetails = {

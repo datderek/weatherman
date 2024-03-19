@@ -6,6 +6,7 @@ export default class Display {
   static currentLocation = document.getElementById('current-location');
   static currentTemperature = document.getElementById('current-temperature');
   static currentIcon = document.getElementById('current-icon');
+  static details = document.getElementById('details');
   static hourlyList = document.getElementById('hourly-list');
   static additionalDetails = document.getElementsByClassName('details');
   static forecast = document.getElementById('forecast');
@@ -15,6 +16,10 @@ export default class Display {
     this.currentCondition.textContent = `${data.condition}`;
     this.currentTemperature.textContent = `${data.temperature} °F`;
     this.currentIcon.appendChild(WeatherIcon.getIcon(data.conditionCode));
+
+    const hour = new Date(data.time).getHours();
+    this.details.className = "";
+    this.details.classList.add(`g${hour}`);
   }
 
   static displayAdditionalDetails(data) {
@@ -32,15 +37,17 @@ export default class Display {
 
   static displayHourly(data) {
     data.forEach((hourlyData) => {
-      const hour = document.createElement('span');
-      hour.textContent = (hourlyData.time.split(' '))[1];
+      const time = document.createElement('span');
+      time.textContent = (hourlyData.time.split(' '))[1];
+      const hour = new Date(hourlyData.time).getHours();
       const weatherIcon = document.createElement('div');
       weatherIcon.appendChild(WeatherIcon.getIcon(hourlyData.conditionCode));
+      weatherIcon.classList.add(`g${hour}`);
       const temperature = document.createElement('span');
       temperature.textContent = `${hourlyData.temperature} °F`;
       
       const hourlyDetail = document.createElement('li');
-      hourlyDetail.appendChild(hour);
+      hourlyDetail.appendChild(time);
       hourlyDetail.appendChild(weatherIcon);
       hourlyDetail.appendChild(temperature);
       hourlyDetail.classList.add("hourly-details")
@@ -73,7 +80,7 @@ export default class Display {
   }
 
   static clearDisplay() {
-    [this.forecast, this.hourlyList, this.currentCondition, this.currentLocation, this.currentTemperature].forEach((element) => {
+    [this.forecast, this.hourlyList, this.currentCondition, this.currentLocation, this.currentTemperature, this.currentIcon].forEach((element) => {
       element.replaceChildren();
     })
   }

@@ -1,6 +1,7 @@
 import Display from './Display';
 import WeatherAPIFacade from './WeatherAPIFacade';
 import './style.css';
+import './gradient.css';
 
 const locationForm = document.querySelector('form');
 

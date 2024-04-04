@@ -13,3 +13,7 @@ locationForm.addEventListener('submit', (e) => {
   const weatherPromise = WeatherAPIFacade.getWeather(location);
   weatherPromise.then((data) => Display.updateDisplay(data));
 })
+
+// Default location:
+const weatherPromise = WeatherAPIFacade.getWeather('Los Angeles');
+weatherPromise.then((data) => Display.updateDisplay(data));
